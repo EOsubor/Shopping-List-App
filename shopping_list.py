@@ -23,6 +23,14 @@ def show_list():
         index += 1    
     print("_" * 10)
     
+def remove_from_cart():
+    show_list()
+    what_to_remove = input("What would you like to remove?\n> ")
+    try:
+        shopping_cart.remove(what_to_remove)
+    except ValueError:
+        pass
+    show_list()
     
 def add_to_list(item):
     show_list()
@@ -37,10 +45,10 @@ def add_to_list(item):
     except ValueError:
         position = None
     if position is not None:
-        shopping_cart.insert(position-1, item)
+        shopping_cart.insert(position-1, item)                
     else:
-        shopping_cart.append(new_item)                 
-    
+        shopping_cart.append(item)
+        
     show_list() 
               
 show_help()
@@ -48,7 +56,7 @@ show_help()
 while True:
     new_item = input("> ")  
     
-    if new_item.upper() == 'DONE' or new_item == 'QUIT':
+    if new_item.upper() == 'DONE' or new_item.upper() == 'QUIT':
         break
     elif new_item.upper() == 'SHOW':
         show_list()
@@ -56,6 +64,8 @@ while True:
     elif new_item.upper() == 'HELP':
         show_help()
         continue
+    elif new_item.upper() == 'REMOVE':
+        remove_from_cart()
     else:
         add_to_list(new_item)
         
