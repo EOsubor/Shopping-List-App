@@ -13,16 +13,14 @@ Enter 'DONE' to stop adding items.
 Enter 'HELP' to show this help.
 Enter 'SHOW' to view shopping cart.
 """)
-    
+
 def show_list():
     clear_screen()
     print("Here's your list:")
-    index = 1
-    for item in shopping_cart:                 
+    for index, item in enumerate(shopping_cart, 1):
         print(f"{index}. {item}")
-        index += 1    
     print("_" * 10)
-    
+
 def remove_from_cart():
     show_list()
     what_to_remove = input("What would you like to remove?\n> ")
@@ -31,7 +29,7 @@ def remove_from_cart():
     except ValueError:
         pass
     show_list()
-    
+
 def add_to_list(item):
     show_list()
     if shopping_cart:
@@ -45,17 +43,17 @@ def add_to_list(item):
     except ValueError:
         position = None
     if position is not None:
-        shopping_cart.insert(position-1, item)                
+        shopping_cart.insert(position-1, item)
     else:
         shopping_cart.append(item)
-        
-    show_list() 
-              
+
+    show_list()
+
 show_help()
 
 while True:
-    new_item = input("> ")  
-    
+    new_item = input("> ")
+
     if new_item.upper() == 'DONE' or new_item.upper() == 'QUIT':
         break
     elif new_item.upper() == 'SHOW':
@@ -68,6 +66,6 @@ while True:
         remove_from_cart()
     else:
         add_to_list(new_item)
-        
-        
+
+
 show_list()
